@@ -1,0 +1,62 @@
+﻿@model IEnumerable<My_Restaurant.Models.Restaurant>
+
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- search bar -->
+<div class="container search-bar" id="searchBar">
+    <div class="search-bar-outer">
+        <div class="search-bar-inner">
+            @using (Html.BeginForm("Search", "Restaurant"))
+            {
+                @Html.AntiForgeryToken()
+                <h4 class="mb-2">尋找餐廳：</h4>
+                <div class="input-group">
+                    <input type="text" id="keyword" name="keyword" value="@Request["keyword"]" class="form-control" placeholder="輸入餐廳名稱" aria-label="Restaurant Name..." aria-describedby="search-button" required>
+                    <div class="input-group-append">
+                        <button class="btn btn-major" type="submit" id="search-button"><i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<div class="container mt-5">
+    <hr>
+
+    <!-- restaurant list -->
+    <div id="restaurantList">
+        @Html.Partial("_RestaurantListPartial", Model)
+    </div>
+
+    <!-- --分頁paginator-- -->
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center  mt-5" id="pagination" data-currentPage="1"></ul>
+    </nav>
+</div>
+
+@section Scripts{
+    <script>
+            $('#pagination').twbsPagination({
+                totalPages: @ViewBag.totalPages,
+                visiblePages: @ViewBag.visiblePages,
+                hideOnlyOnePage: true,
+                initiateStartPageClick: false,
+                onPageClick: function (event, pageNum) {
+                    $.ajax({
+                        url:'@Url.Action("GetSearchPage", "Restaurant")',
+                        data: { keyword: $('#keyword').val(), page: pageNum }, // 傳遞目前頁碼
+                            success: function (result) {
+                                $('#restaurantList').html(result);
+                            },
+                            error: function () {
+                                alert('讀取失敗');
+                            }
+                        });
+                }
+            });
+    </script>
+}

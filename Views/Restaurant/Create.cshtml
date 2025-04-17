@@ -1,0 +1,187 @@
+﻿@model My_Restaurant.Models.Restaurant
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var nameError = ViewData.ModelState["RestaurantName"]?.Errors.FirstOrDefault()?.ErrorMessage ?? "";
+    var name_enError = ViewData.ModelState["RestaurantName_EN"]?.Errors.FirstOrDefault()?.ErrorMessage ?? "";
+    var categoryError = ViewData.ModelState["Category"]?.Errors.FirstOrDefault()?.ErrorMessage ?? "";
+    var imageError = ViewData.ModelState["Image"]?.Errors.FirstOrDefault()?.ErrorMessage ?? "";
+    var locationError = ViewData.ModelState["Location"]?.Errors.FirstOrDefault()?.ErrorMessage ?? "";
+    var phoneError = ViewData.ModelState["Phone"]?.Errors.FirstOrDefault()?.ErrorMessage ?? "";
+    var mapError = ViewData.ModelState["Google_map"]?.Errors.FirstOrDefault()?.ErrorMessage ?? "";
+    var ratingError = ViewData.ModelState["Rating"]?.Errors.FirstOrDefault()?.ErrorMessage ?? "";
+    var descError = ViewData.ModelState["Description"]?.Errors.FirstOrDefault()?.ErrorMessage ?? "";
+}
+
+
+<div class="container search-bar mb-5">
+    <div class="search-bar-outer">
+        <div class="search-bar-inner">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <h4 class="mb-2">新增餐廳</h4>
+                <div class="row g-0 mb-3">
+                    @Html.LabelFor(model => model.RestaurantName, new { @class = "col-sm-3 col-form-label star" })
+                    <div class="col-sm-9">
+                        @Html.EditorFor(model => model.RestaurantName, new
+                        {
+                            htmlAttributes = new
+                            {
+                                @class = "form-control bg-light",
+                                placeholder = "輸入餐廳中文名，必填",
+                                @data_error = nameError,
+                                required = "required"
+                            }
+                        })
+
+                    </div>
+                </div>
+                <div class="row g-0 mb-3">
+                    @Html.LabelFor(model => model.RestaurantName_EN, new { @class = "col-sm-3 col-form-label" })
+                    <div class="col-sm-9">
+                        @Html.EditorFor(model => model.RestaurantName_EN, new
+                        {
+                            htmlAttributes = new
+                            {
+                                @class = "form-control bg-light",
+                                placeholder = "輸入餐廳英文名，可空白不填",
+                                @data_error = name_enError,
+                                required = "required"
+                            }
+                        })
+                    </div>
+                </div>
+                <div class="row g-0 mb-3">
+                    @Html.LabelFor(model => model.Category, new { @class = "col-sm-3 col-form-label star" })
+                    <div class="col-sm-9">
+                        @Html.EditorFor(model => model.Category, new
+                        {
+                            htmlAttributes = new
+                            {
+                                @class = "form-control bg-light",
+                                placeholder = "輸入餐廳類別，必填",
+                                @data_error = categoryError,
+                                required = "required"
+                            }
+                        })
+                    </div>
+                </div>
+                <div class="row g-0 mb-3">
+                    @Html.LabelFor(model => model.Image, new { @class = "col-sm-3 col-form-label star" })
+                    <div class="col-sm-9">
+                        @Html.EditorFor(model => model.Image, new
+                        {
+                            htmlAttributes = new
+                            {
+                                @class = "form-control bg-light",
+                                placeholder = "輸入餐廳網路照片網址，必填",
+                                @data_error = imageError,
+                                required = "required"
+                            }
+                        })
+                    </div>
+                </div>
+                <div class="row g-0 mb-3">
+                    @Html.LabelFor(model => model.Location, new { @class = "col-sm-3 col-form-label star" })
+                    <div class="col-sm-9">
+                        @Html.EditorFor(model => model.Location, new
+                        {
+                            htmlAttributes = new
+                            {
+                                @class = "form-control bg-light",
+                                placeholder = "輸入餐廳地址，必填",
+                                @data_error = locationError,
+                                required = "required"
+                            }
+                        })
+                    </div>
+                </div>
+                <div class="row g-0 mb-3">
+                    @Html.LabelFor(model => model.Phone, new { @class = "col-sm-3 col-form-label star" })
+                    <div class="col-sm-9">
+                        @Html.EditorFor(model => model.Phone, new
+                        {
+                            htmlAttributes = new
+                            {
+                                @class = "form-control bg-light",
+                                placeholder = "輸入餐廳手機或(區碼)電話，必填",
+                                @data_error = phoneError,
+                                required = "required"
+                            }
+                        })
+                    </div>
+                </div>
+                <div class="row g-0 mb-3">
+                    @Html.LabelFor(model => model.Google_map, new { @class = "col-sm-3 col-form-label star" })
+                    <div class="col-sm-9">
+                        @Html.EditorFor(model => model.Google_map, new
+                        {
+                            htmlAttributes = new
+                            {
+                                @class = "form-control bg-light",
+                                placeholder = "輸入餐廳Google Map連結，必填",
+                                @data_error = mapError,
+                                required = "required"
+                            }
+                        })
+                    </div>
+                </div>
+                <div class="row g-0 mb-3">
+                    @Html.LabelFor(model => model.Rating, new { @class = "col-sm-3 col-form-label star" })
+                    <div class="col-sm-9">
+                        @Html.EditorFor(model => model.Rating, new
+                        {
+                            htmlAttributes = new
+                            {
+                                @class = "form-control bg-light",
+                                placeholder = "輸入餐廳評分1-5(含1-5之間的兩位小數)，必填",
+                                @data_error = ratingError,
+                                required = "required"
+                            }
+                        })
+                    </div>
+                </div>
+                <div class="row g-0 mb-3">
+                    @Html.LabelFor(model => model.Description, new { @class = "col-sm-3 col-form-label star" })
+                    <div class="col-sm-9">
+                        @Html.TextAreaFor(model => model.Description, new
+                        {
+                                @class = "form-control bg-light",
+                                style = "resize:none",
+                                rows = "3",
+                                placeholder = "輸入餐廳簡介，必填",
+                                @data_error = descError,
+                                required = "required"
+                            })
+                    </div>
+                </div>
+                <div class="d-grid gap-2">
+                    <input type="button" id="uploadBtn" class="btn btn-major" value="新增">
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            var shouldCallError = '@ViewBag.callErrorModal' === 'True';
+            if (shouldCallError) {
+                if ('@ViewBag.errorTitle' === "驗證錯誤") {
+                    callDataError()
+                } else {
+                    var title = '@ViewBag.errorTitle';
+                    var msg = '@ViewBag.errorMessage';
+                    callErrorMsg(title, msg);
+                }
+            }
+        });
+    </script>
+}
+
+

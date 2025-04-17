@@ -1,0 +1,176 @@
+header {
+  overflow: hidden;
+}
+
+.navbar .navbar-brand {
+  color: #4592af;
+}
+
+.navbar .navbar-brand:hover {
+  color: #226089;
+}
+
+/*Nav not active */
+#navbarSupportedContent .nav-pills .li-pill .nav-link:not(.active) {
+  background-color: #FFFEEF;
+}
+
+/*Nav active*/
+#navbarSupportedContent .nav-pills .li-pill .nav-link {
+  background-color: #fce2cf;
+  color: black;
+}
+
+
+.banner {
+  position: relative;
+  z-index: -1;
+  margin: -5px;
+  height: 360px;
+  background: #dddddd center center url('https://assets-lighthouse.s3.amazonaws.com/uploads/image/file/5720/restaurants-list-cover.jpg');
+  background-size: cover;
+  filter: blur(3px);
+}
+
+.search-bar .search-bar-outer {
+  margin: 0 auto;
+  max-width: 680px;
+  background-color: #fce2cf;
+  border-radius: 8px;
+  padding: 20px 30px;
+  border: 0;
+  margin-top: -60px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.search-bar .search-bar-inner h4 {
+  color: #9b4b4b;
+}
+
+hr {
+  display: block;
+  margin-top: 0.5em;
+  margin-bottom: 1em;
+  margin-left: auto;
+  margin-right: auto;
+  border-style: inset;
+  border-width: 1px;
+}
+
+.form-control::placeholder {
+  color: #aaaaaa;
+  font-size: 0.8rem;
+}
+
+.btn-major {
+  background-color: #9b4b4b;
+  color: white;
+}
+
+.btn-second {
+  background-color: #fce2cf;
+  color: #9b4b4b;
+  border-radius: 50%;
+}
+
+
+.form-control:focus {
+    box-shadow: none;
+    border-color: #212529;
+}
+
+::-webkit-input-placeholder {
+  font-size: 15px !important;
+}
+
+/* #region  卡片 */
+.card {
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.card img {
+  height: 220px;
+}
+
+.card-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.restaurant-category {
+  color: #666666;
+  font-size: 1rem;
+}
+
+/* #endregion */
+
+/* #region  分頁 */
+.pagination>li>a {
+  background-color: white;
+  color: #5A4181;
+}
+
+.pagination>li>a:focus,
+.pagination>li>a:hover,
+.pagination>li>span:focus,
+.pagination>li>span:hover {
+  color: #5a5a5a;
+  background-color: #eee;
+  border-color: #ddd;
+}
+
+.pagination>.active>a {
+  color: white;
+  background-color: #5A4181 !Important;
+  border: solid 1px #5A4181 !Important;
+}
+
+.pagination>.active>a:hover {
+  background-color: #5A4181 !Important;
+  border: solid 1px #5A4181;
+}
+
+/* #endregion */
+
+/* #region  詳細資料 */
+.restaurant-show-title {
+  position: relative;
+  top: -60px;
+  color: white;
+  text-align: center;
+  font-size: 3rem;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.list-group {
+  font-size: 1.3rem;
+}
+
+/* #endregion */
+
+.star:before {
+    content: "*";
+    color: #e85a4d;
+}
+
+@media screen and (max-width: 992px) {
+  .card img {
+    height: 115px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+
+  .restaurant-show-title {
+    font-size: 2rem;
+  }
+}
+
+@media screen and (max-width: 575px) {
+
+  .card img {
+    height: auto;
+  }
+
+}
