@@ -156,7 +156,7 @@ namespace My_Restaurant.Controllers
                     };
                     sqlHelper.CUD(strSQL, parameters);
                     //資料新增至資料庫後，返回Index，剛新增的資料會在第一筆顯示
-                    return View("Index");
+                    return RedirectToAction("Index");
                 }
                 else
                 {
