@@ -6,7 +6,6 @@ using System.Web.Mvc;
 using System.Web.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using Dapper;
 using My_Restaurant.Models;
 using My_Restaurant.Models.Repo;
 using System.Web.UI;
@@ -16,15 +15,18 @@ namespace My_Restaurant.Controllers
     public class RestaurantController : Controller
     {
         SQLHelper sqlHelper = new SQLHelper();
-        private  int intPageSize = 3;// 每頁幾筆資料
+        private  int intPageSize = 3;// 設定分頁每頁幾筆資料
 
         // GET: Restaurant
         #region Index
         public ActionResult Index()
         {
+            //設定分頁顯示頁數
             ViewBag.visiblePages = 3;
+            //計算資料總筆數
             string strSQL = "SELECT COUNT(RestaurantID) FROM Restaurant";
             double doubleCount = Convert.ToDouble(sqlHelper.GetInt(strSQL , new SqlParameter[] { }));
+            //設定分頁總頁數
             ViewBag.totalPages = Math.Ceiling(doubleCount / intPageSize);
 
             return View();
@@ -33,8 +35,9 @@ namespace My_Restaurant.Controllers
 
         public ActionResult GetPage(int page = 1)
         {
+            //計算該分頁顯示前需跳過幾筆數據
             int skipCount = (page - 1) * intPageSize;
-
+            //OFFSET @skip ROWS FETCH FIRST @pageSize ROWS ONLY語句需SQL Server2012以上版本才可使用
             string strSQL = @"
                             SELECT * FROM Restaurant 
                             ORDER BY uploadTime  desc
@@ -44,9 +47,8 @@ namespace My_Restaurant.Controllers
                 new SqlParameter("@skip", skipCount),
                 new SqlParameter("@pageSize", intPageSize)
             };
-
             List<Restaurant> result = GetRestaurants(strSQL , parameters);
-
+            //將資料丟到RestaurantListPartial View進行局部畫面渲染並出現在Index View
             return PartialView("_RestaurantListPartial", result);
         }
         #endregion
@@ -54,12 +56,14 @@ namespace My_Restaurant.Controllers
         #region Search
         [HttpPost]
         [ValidateAntiForgeryToken]
+        //搜尋功能觸發時，需先直接返回第一頁搜尋結果
         public ActionResult Search(string keyword, int page = 1)
         {
             List<Restaurant> result = GetSearchReault(keyword, page);
             return View(result);
         }
 
+        //由分頁AJAX觸發的第N頁查詢結果，只有RestaurantListPartial View需進行局部畫面更新
         public ActionResult GetSearchPage(string keyword, int page = 1)
         {
             List<Restaurant> result = GetSearchReault(keyword, page);
@@ -123,7 +127,7 @@ namespace My_Restaurant.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Restaurant oneRestaurant)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid)//後端資料驗證
             {
                 string strSQL = "SELECT * FROM Restaurant WHERE Location = @location";
                 SqlParameter[] parameters = new SqlParameter[]
@@ -151,11 +155,12 @@ namespace My_Restaurant.Controllers
                         new SqlParameter("@uploadTime",DateTime.Now),
                     };
                     sqlHelper.CUD(strSQL, parameters);
+                    //資料新增至資料庫後，返回Index，剛新增的資料會在第一筆顯示
                     return View("Index");
                 }
                 else
                 {
-                    //餐廳資料重複處理：用 ViewBag 搭配 JavaScript
+                    //餐廳資料重複處理：設定ViewBag傳值至前端再搭配JS呼叫SweetAlert2 
                     ViewBag.callErrorModal = true;
                     ViewBag.errorTitle = "資料重複";
                     ViewBag.errorMessage = $"該地址已存在餐廳 :【 {oldRestaurant.RestaurantName}】，請重新確認您輸入的資料";
@@ -164,6 +169,7 @@ namespace My_Restaurant.Controllers
             }
             else
             {
+                //後端資料驗證有誤，設定ViewBag傳值至前端再搭配JS呼叫SweetAlert2 
                 ViewBag.callErrorModal = true;
                 ViewBag.errorTitle = "驗證錯誤";
                 return View(oneRestaurant);

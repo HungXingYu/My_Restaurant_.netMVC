@@ -149,10 +149,14 @@ hr {
 
 /* #endregion */
 
+/*#region *字號 */
+
 .star:before {
     content: "*";
     color: #e85a4d;
 }
+
+/*#endregion */
 
 @media screen and (max-width: 992px) {
   .card img {

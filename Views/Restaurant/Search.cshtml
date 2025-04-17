@@ -48,7 +48,7 @@
                 onPageClick: function (event, pageNum) {
                     $.ajax({
                         url:'@Url.Action("GetSearchPage", "Restaurant")',
-                        data: { keyword: $('#keyword').val(), page: pageNum }, // 傳遞目前頁碼
+                        data: { keyword: $('#keyword').val(), page: pageNum }, //傳遞搜尋關鍵字及目前頁碼
                             success: function (result) {
                                 $('#restaurantList').html(result);
                             },

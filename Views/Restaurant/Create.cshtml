@@ -4,6 +4,7 @@
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
+    //從 ModelState 中取得各資料欄位在後端進行驗證後的錯誤訊息，如果沒有錯誤，就回傳空字串，再將得到的結果給自行設定的data-error屬性
     var nameError = ViewData.ModelState["RestaurantName"]?.Errors.FirstOrDefault()?.ErrorMessage ?? "";
     var name_enError = ViewData.ModelState["RestaurantName_EN"]?.Errors.FirstOrDefault()?.ErrorMessage ?? "";
     var categoryError = ViewData.ModelState["Category"]?.Errors.FirstOrDefault()?.ErrorMessage ?? "";
@@ -169,6 +170,7 @@
 
 @section Scripts{
     <script>
+        //後端進行資料驗證後，前端依照ViewBag判斷該呼叫哪一個錯誤modal
         $(document).ready(function () {
             var shouldCallError = '@ViewBag.callErrorModal' === 'True';
             if (shouldCallError) {
