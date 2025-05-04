@@ -18,5 +18,7 @@ namespace My_Restaurant.Models.Repo
 
         void CUD(string strSQL, SqlParameter[] parameters);
 
+        void CUD_Dapper(string strSQL, object sqlParameters);
+
     }
 }

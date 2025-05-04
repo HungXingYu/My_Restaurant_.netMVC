@@ -144,11 +144,18 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Category.cs" />
     <Compile Include="Models\MVC_TestDBContext.cs" />
     <Compile Include="Models\Repo\ISQLHelper.cs" />
     <Compile Include="Models\Repo\SQLHelper.cs" />
+    <Compile Include="Models\ResponseMessage.cs" />
     <Compile Include="Models\Restaurant.cs" />
     <Compile Include="Models\RestaurantItemAttributes.cs" />
+    <Compile Include="Models\Restaurant_oldItemAttributes.cs" />
+    <Compile Include="Models\Retaurant_old.cs" />
+    <Compile Include="Models\ViewModels\RCmultiViewModel.cs" />
+    <Compile Include="Models\ViewModels\RCViewModel.cs" />
+    <Compile Include="Models\ViewModels\ResaturantCategoryViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -157,8 +164,11 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\bootstrap-selectHelper.js" />
+    <Content Include="Scripts\callAJAXHelper.js" />
     <Content Include="Scripts\modalHelper.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\paginationHelper.js" />
     <Content Include="Scripts\popper.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -171,9 +181,9 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Restaurant\Index.cshtml" />
-    <Content Include="Views\Shared\_RestaurantListPartial.cshtml" />
-    <Content Include="Views\Restaurant\Search.cshtml" />
+    <Content Include="Views\Restaurant\Index_old.cshtml" />
+    <Content Include="Views\Shared\_RestaurantListPartial_old.cshtml" />
+    <Content Include="Views\Restaurant\Search_old.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -184,6 +194,13 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <None Include="packages.config" />
+    <Content Include="Views\Restaurant\Detail_old.cshtml" />
+    <Content Include="Views\Restaurant\Create_old.cshtml" />
+    <Content Include="Views\Shared\_RestaurantListPartial_viewModel.cshtml" />
+    <Content Include="Views\Restaurant\Index_viewModel.cshtml" />
+    <Content Include="Views\Shared\_RestaurantListPartial.cshtml" />
+    <Content Include="Views\Restaurant\Index.cshtml" />
+    <Content Include="Views\Restaurant\Search.cshtml" />
     <Content Include="Views\Restaurant\Detail.cshtml" />
     <Content Include="Views\Restaurant\Create.cshtml" />
   </ItemGroup>

@@ -12,10 +12,16 @@ namespace My_Restaurant.Models
         {
         }
 
+        public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Restaurant> Restaurants { get; set; }
+        public virtual DbSet<Restaurant_old> Restaurant_old { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Category>()
+                .HasMany(e => e.Restaurants)
+                .WithRequired(e => e.Category)
+                .WillCascadeOnDelete(false);
         }
     }
 }

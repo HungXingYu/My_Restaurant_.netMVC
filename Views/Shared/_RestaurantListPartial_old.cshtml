@@ -1,4 +1,4 @@
-﻿@model IEnumerable<My_Restaurant.Models.Restaurant>
+﻿@model IEnumerable<My_Restaurant.Models.Restaurant_old>
 
 
 <!-- restaurant list -->
@@ -12,7 +12,7 @@
         foreach (var item in Model)
         {
             <div class="col">
-                    <a href="/Restaurant/Detail/@item.RestaurantID" class="text-secondary">
+                    <a href="/Restaurant/Detail_old/@item.RestaurantID" class="text-secondary">
                         <div class="card h-100">
                             <img class="card-img-top" src="@item.Image" alt="@item.RestaurantName">
                             <div class="card-body p-3">
@@ -20,11 +20,11 @@
 
 
                                 <div class="restaurant-category mb-1">
-                                    <i class="fas fa-utensils pr-2"></i> @item.Category.CategoryName/<i class="fas fa-star fa-xs"></i> @item.Rating
+                                    <i class="fas fa-utensils pr-2"></i> @item.Category/<i class="fas fa-star fa-xs"></i> @item.Rating
                                 </div>
 
                                 <div>
-                                    <i class="fa-solid fa-calendar-check"></i> @(item.uploadTime != null ? item.uploadTime.Value.ToString("yyyy/MM/dd HH:mm:ss") : "")  update
+                                    <i class="fa-solid fa-calendar-check"></i> @(item.uploadTime != null ? item.uploadTime.ToString("yyyy/MM/dd HH:mm:ss") : "")  update
                                 </div>
 
                             </div>

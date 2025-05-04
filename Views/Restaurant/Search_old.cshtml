@@ -1,7 +1,7 @@
-﻿@model IEnumerable<My_Restaurant.Models.Restaurant>
+﻿@model IEnumerable<My_Restaurant.Models.Restaurant_old>
 
 @{
-    ViewBag.Title = "Search";
+    ViewBag.Title = "Search_old";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -9,7 +9,7 @@
 <div class="container search-bar" id="searchBar">
     <div class="search-bar-outer">
         <div class="search-bar-inner">
-            @using (Html.BeginForm("Search", "Restaurant"))
+            @using (Html.BeginForm("Search_old", "Restaurant"))
             {
                 @Html.AntiForgeryToken()
                 <h4 class="mb-2">尋找餐廳：</h4>
@@ -25,28 +25,11 @@
 </div>
 
 <div class="container mt-5">
-    <div class="row justify-content-between mb-3">
-        <!--版面切換-->
-        <div class="col-auto">
-        </div>
-        <!--排序-->
-        <div class="col-auto">
-            <div class="form-group">
-                <select class="selectpicker form-control" data-style="btn-dark" id="sort" data-value="-uploadTime">
-                    <option value="uploadTime">更新時間(早>晚)</option>
-                    <option value="-uploadTime">更新時間(晚>早)</option>
-                    <option value="rating">餐廳評分(低>高)</option>
-                    <option value="-rating">餐廳評分(高>低)</option>
-                </select>
-            </div>
-        </div>
-    </div>
-
     <hr>
 
     <!-- restaurant list -->
     <div id="restaurantList">
-        @Html.Partial("_RestaurantListPartial", Model)
+        @Html.Partial("_RestaurantListPartial_old", Model)
     </div>
 
     <!-- --分頁paginator-- -->
@@ -57,7 +40,6 @@
 
 @section Scripts{
     <script>
-        setSortPagination_Keyword(@ViewBag.totalPages,@ViewBag.visiblePages, '@Url.Action("GetSearchPageBySort_keyword", "Restaurant")')
-        setSortChange(@ViewBag.totalPages,@ViewBag.visiblePages, '@Url.Action("GetSearchPageBySort_keyword", "Restaurant")')
+        setKeywordPagination(@ViewBag.totalPages,@ViewBag.visiblePages, '@Url.Action("GetSearchPage_old", "Restaurant")')
     </script>
 }

@@ -6,9 +6,9 @@ namespace My_Restaurant.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [MetadataType(typeof(RestaurantItemAttributes))]
-    [Table("Restaurant")]
-    public partial class Restaurant
+    [MetadataType(typeof(Restaurant_oldItemAttributes))]
+    [Table("Restaurant_old")]
+    public partial class Restaurant_old
     {
         public int RestaurantID { get; set; }
 
@@ -16,7 +16,7 @@ namespace My_Restaurant.Models
 
         public string RestaurantName_EN { get; set; }
 
-        public int CategoryID { get; set; }
+        public string Category { get; set; }
 
         public string Image { get; set; }
 
@@ -30,9 +30,6 @@ namespace My_Restaurant.Models
 
         public string Description { get; set; }
 
-        public DateTime? uploadTime { get; set; }
-
-        //導覽屬性，一個餐廳對應一個餐廳類別
-        public virtual Category Category { get; set; }
+        public DateTime uploadTime { get; set; }
     }
 }

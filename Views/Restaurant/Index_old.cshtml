@@ -1,5 +1,7 @@
-﻿@{
-    ViewBag.Title = "Index";
+﻿@model IEnumerable<My_Restaurant.Models.Restaurant_old>
+
+@{
+    ViewBag.Title = "Index_old";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -7,7 +9,7 @@
 <div class="container search-bar" id="searchBar">
     <div class="search-bar-outer">
         <div class="search-bar-inner">
-            @using (Html.BeginForm("Search", "Restaurant"))
+            @using (Html.BeginForm("Search_old", "Restaurant"))
             {
                 @Html.AntiForgeryToken()
                 <h4 class="mb-2">尋找餐廳：</h4>
@@ -26,19 +28,8 @@
     <div class="row justify-content-between mb-3">
         <!--新增按鈕-->
         <div class="col-5">
-            <input type="button" id="createBtn" class="btn btn-dark col-5" value="新增"
-                   onclick="location.href='@Url.Action("Create", "Restaurant")'">
-        </div>
-        <!--排序-->
-        <div class="col-auto">
-            <div class="form-group">
-                <select class="selectpicker form-control" data-style="btn-dark" id="sort" data-value="-uploadTime">
-                    <option value="uploadTime">更新時間(早>晚)</option>
-                    <option value="-uploadTime">更新時間(晚>早)</option>
-                    <option value="rating">餐廳評分(低>高)</option>
-                    <option value="-rating">餐廳評分(高>低)</option>
-                </select>
-            </div>
+            <input type="button" id="createBtn" class="btn btn-dark col-5" value="新增" 
+                   onclick="location.href='@Url.Action("Create_old", "Restaurant")'" >
         </div>
     </div>
 
@@ -46,7 +37,7 @@
 
     <!-- restaurant list -->
     <div id="restaurantList">
-        @Html.Action("GetPageBySort_noKeyword", "Restaurant")
+        @Html.Action("GetPage_old", "Restaurant")
     </div>
 
     <!-- --分頁paginator-- -->
@@ -57,8 +48,7 @@
 
 @section Scripts{
     <script>
-        setSortPagination_NoKeyword(@ViewBag.totalPages,@ViewBag.visiblePages, '@Url.Action("GetPageBySort_noKeyword", "Restaurant")')
-        setSortChange(@ViewBag.totalPages,@ViewBag.visiblePages, '@Url.Action("GetPageBySort_noKeyword", "Restaurant")')
+        setNoKeywordPagination(@ViewBag.totalPages,@ViewBag.visiblePages, '@Url.Action("GetPage", "Restaurant")')
     </script>
 }
 

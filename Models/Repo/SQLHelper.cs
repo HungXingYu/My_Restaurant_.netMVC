@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Configuration;
 using System.Data;
 using System.Configuration;
+using Dapper;
 
 namespace My_Restaurant.Models.Repo
 {
@@ -60,6 +61,15 @@ namespace My_Restaurant.Models.Repo
                     sqlCommand.Parameters.AddRange(parameters);
                 }
                 sqlCommand.ExecuteNonQuery();
+            }
+        }
+
+        public void CUD_Dapper(string strSQL, object sqlParameters)
+        {
+            using (SqlConnection sqlConnection = new SqlConnection(GstrConnMVC_TestDB))
+            {
+                sqlConnection.Open();
+                sqlConnection.Execute(strSQL, sqlParameters);
             }
         }
     }

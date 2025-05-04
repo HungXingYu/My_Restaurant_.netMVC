@@ -1,22 +1,19 @@
-﻿@model My_Restaurant.Models.Restaurant
+﻿@model My_Restaurant.Models.Restaurant_old
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Create_old";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
     //從 ModelState 中取得各資料欄位在後端進行驗證後的錯誤訊息，如果沒有錯誤，就回傳空字串，再將得到的結果給自行設定的data-error屬性
     var nameError = ViewData.ModelState["RestaurantName"]?.Errors.FirstOrDefault()?.ErrorMessage ?? "";
     var name_enError = ViewData.ModelState["RestaurantName_EN"]?.Errors.FirstOrDefault()?.ErrorMessage ?? "";
-    var categoryError = ViewData.ModelState["CategoryID"]?.Errors.FirstOrDefault()?.ErrorMessage ?? "";
+    var categoryError = ViewData.ModelState["Category"]?.Errors.FirstOrDefault()?.ErrorMessage ?? "";
     var imageError = ViewData.ModelState["Image"]?.Errors.FirstOrDefault()?.ErrorMessage ?? "";
     var locationError = ViewData.ModelState["Location"]?.Errors.FirstOrDefault()?.ErrorMessage ?? "";
     var phoneError = ViewData.ModelState["Phone"]?.Errors.FirstOrDefault()?.ErrorMessage ?? "";
     var mapError = ViewData.ModelState["Google_map"]?.Errors.FirstOrDefault()?.ErrorMessage ?? "";
     var ratingError = ViewData.ModelState["Rating"]?.Errors.FirstOrDefault()?.ErrorMessage ?? "";
     var descError = ViewData.ModelState["Description"]?.Errors.FirstOrDefault()?.ErrorMessage ?? "";
-
-    //category下拉選單自訂data-value屬性的值
-    var categoryDataValue = (Model == null)? 0 : Model.CategoryID;
 }
 
 
@@ -59,24 +56,18 @@
                     </div>
                 </div>
                 <div class="row g-0 mb-3">
-                    @Html.LabelFor(model => model.CategoryID, new { @class = "col-sm-3 col-form-label star" })
-                    <div class="col-sm-8">
-                        <div class="form-group">
-                            @Html.DropDownListFor(model => model.CategoryID, ViewBag.categoryListItem as SelectList, new
-                       {
-                           @class = "selectpicker form-control",
-                           @title = "必選，選擇餐廳類別，如搜尋不到請點選+自行建立",
-                           @data_live_search = "true",
-                           @data_size = "3",
-                           @data_dropup_auto = "false",
-                           @data_value = categoryDataValue,
-                           @data_error = categoryError,
-                           required = "required"
-                       })
-                        </div>
-                    </div>
-                    <div class="col-sm-1  d-grid gap-2">
-                        <button type="button" class="btn btn-major" id="addCategory"><i class="fa-solid fa-plus"></i></button>
+                    @Html.LabelFor(model => model.Category, new { @class = "col-sm-3 col-form-label star" })
+                    <div class="col-sm-9">
+                        @Html.EditorFor(model => model.Category, new
+                        {
+                            htmlAttributes = new
+                            {
+                                @class = "form-control bg-light",
+                                placeholder = "輸入餐廳類別，必填",
+                                @data_error = categoryError,
+                                required = "required"
+                            }
+                        })
                     </div>
                 </div>
                 <div class="row g-0 mb-3">

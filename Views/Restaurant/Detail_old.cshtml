@@ -1,15 +1,13 @@
-﻿@model My_Restaurant.Models.Restaurant
+﻿@model My_Restaurant.Models.Restaurant_old
 
 @{
-    ViewBag.Title = "Detail";
+    ViewBag.Title = "Detail_old";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@if (Model == null)
+@if (Model.RestaurantName == null)
 {
-    <div class="text-danger" id="noData">
-        <h1>您自行輸入餐廳索引不存在，請先新增資料</h1>
-    </div>
+    <div class="text-danger">查無結果</div>
 }
 else
 {
@@ -20,10 +18,10 @@ else
             <div class="col-auto col-md-6">
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">
-                        <i class="fa-solid fa-calendar-check"></i> 更新時間：@(Model.uploadTime != null ? Model.uploadTime.Value.ToString("yyyy/MM/dd HH:mm:ss") : "")
+                        <i class="fa-solid fa-calendar-check"></i> 更新時間：@(Model.uploadTime != null ? Model.uploadTime.ToString("yyyy/MM/dd HH:mm:ss") : "")
                     </li>
                     <li class="list-group-item">
-                        <i class="fas fa-utensils pr-2"></i> 餐廳類別：@Model.Category.CategoryName
+                        <i class="fas fa-utensils pr-2"></i> 餐廳類別：@Model.Category
                     </li>
                     <li class="list-group-item">
                         <i class="fas fa-map-marker-alt pr-2"></i> 餐廳地址：@Model.Location
